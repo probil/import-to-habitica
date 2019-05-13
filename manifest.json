@@ -1,0 +1,26 @@
+{
+  "manifest_version": 2,
+  "name": "Borderify",
+  "version": "1.0",
+  "description": "Adds a red border to all webpages matching https://frontendmasters.com/.",
+  "icons": {
+    "48": "icons/border-48.png"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://frontendmasters.com/courses/*/"],
+      "js": ["content_scripts/frontendMasters.js"],
+      "run_at": "document_end"
+    },
+    {
+      "matches": ["https://egghead.io/courses/*"],
+      "js": ["content_scripts/egghead.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "options_ui": {
+    "page": "options/index.html",
+    "chrome_style": true
+  },
+  "permissions": ["storage"]
+}
