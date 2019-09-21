@@ -9,12 +9,12 @@
   "content_scripts": [
     {
       "matches": ["https://frontendmasters.com/courses/*/"],
-      "js": ["content_scripts/frontendMasters.js"],
+      "js": ["content_scripts/index.js"],
       "run_at": "document_end"
     },
     {
       "matches": ["https://egghead.io/courses/*"],
-      "js": ["content_scripts/egghead.js"],
+      "js": ["content_scripts/index.js"],
       "run_at": "document_end"
     }
   ],
@@ -22,5 +22,12 @@
     "page": "options/index.html",
     "chrome_style": true
   },
-  "permissions": ["storage"]
+  "browser_action": {
+    "default_popup": "popup/dist/index.html",
+    "default_title": "Habitica: Import as TODO",
+    "default_icon": {
+      "48": "icons/border-48.png"
+    }
+  },
+  "permissions": ["activeTab", "storage"]
 }
