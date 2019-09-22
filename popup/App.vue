@@ -11,11 +11,13 @@
     }),
     mounted() {
       chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
-        chrome.tabs.sendMessage(tabs[0].id, void 0, ({ strategy }) => {
-          console.log('success', strategy);
-          if(!strategy) return;
-          this.strategy = strategy;
-        });
+        try {
+          chrome.tabs.sendMessage(tabs[0].id, void 0, ({ strategy } = {}) => {
+            if (chrome.runtime.lastError) return;
+            if (!strategy) return;
+            this.strategy = strategy;
+          });
+        } catch (e) {}
       });
     }
   }
