@@ -17,7 +17,7 @@ const createStrategy = (strategy) => {
   return { getDesc, ...strategy() };
 };
 
-export const getParserByStrategy = name => {
+export const getParserByResource = name => {
   const nameToStrategy = {
     [VUEMASTERY]: createStrategy(vueMasteryParser),
     [EGGHEAD]: createStrategy(eggHeadParser),

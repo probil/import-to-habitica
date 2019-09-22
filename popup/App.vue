@@ -1,8 +1,12 @@
 <template>
   <div>
     <div v-if="strategy">
-      Strategy: {{ strategy.name }}
+      Strategy: {{ strategy.resource }}
       <h3>Task: {{ task.text }}</h3>
+      <h4>Description: {{ task.notes }}</h4>
+      <ul>
+        <li v-for="item of task.checklist">{{ item }}</li>
+      </ul>
     </div>
     <span v-else style="white-space: nowrap">Not supported</span>
   </div>
@@ -16,12 +20,13 @@
     mounted() {
       chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         try {
-          chrome.tabs.sendMessage(tabs[0].id, void 0, ({ strategy, task } = {}) => {
+          chrome.tabs.sendMessage(tabs[0].id, void 0, (response) => {
+            console.log(response);
             if (chrome.runtime.lastError) return;
-            if (!strategy) return;
+            if (!response || !response.strategy) return;
+            const { strategy, task } = response;
             this.strategy = strategy;
             this.task = task;
-            console.log(strategy, task);
           });
         } catch (e) {}
       });
