@@ -1,7 +1,7 @@
 <template>
   <div>
     <span v-if="strategy">Strategy: {{ strategy.name }}</span>
-    <span v-else>Not supported</span>
+    <span v-else style="white-space: nowrap">Not supported</span>
   </div>
 </template>
 <script>
