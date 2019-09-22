@@ -1,12 +1,15 @@
+import { getParserByStrategy } from './parsers'
+import { FRONTENDMASTERS, EGGHEAD } from './constants/resources'
+
 const frontendMastersStrategy = {
-  name: 'FrontendMasters',
-  regexp: /^https:\/\/frontendmasters\.com\/courses\/(?:[\w-]+)\/?$/
+  regexp: /^https:\/\/frontendmasters\.com\/courses\/(?:[\w-]+)\/?$/,
+  strategy: FRONTENDMASTERS
 };
 
 
 const eggheadStrategy = {
-  name: 'EggHead',
-  regexp: /^https:\/\/egghead\.io\/courses\/(?:[\w-]+)\/?$/
+  regexp: /^https:\/\/egghead\.io\/courses\/(?:[\w-]+)\/?$/,
+  strategy: EGGHEAD,
 };
 
 const detectStrategy = () => {
@@ -18,8 +21,22 @@ const detectStrategy = () => {
 };
 
 chrome.runtime.onMessage.addListener((_, __, sendResponse) => {
-  console.log("something happening from the extension");
+  const strategy = detectStrategy();
+  let task = null;
+  if(strategy) {
+    const parser = getParserByStrategy(strategy);
+    if(parser) {
+      const { getText, getDesc, getChecklistItems } = getParserByStrategy(strategy)
+      task = {
+        text: getText(document),
+        notes: getDesc(window),
+        checklist: getChecklistItems(document).map(makeChecklistItem),
+      };
+    }
+  }
+
   sendResponse({
-    strategy: detectStrategy(),
+    strategy,
+    task
   });
 });
