@@ -9,12 +9,12 @@
   "content_scripts": [
     {
       "matches": ["https://frontendmasters.com/courses/*/"],
-      "js": ["content_scripts/index.js"],
+      "js": ["content_scripts/dist/index.js"],
       "run_at": "document_end"
     },
     {
       "matches": ["https://egghead.io/courses/*"],
-      "js": ["content_scripts/index.js"],
+      "js": ["content_scripts/dist/index.js"],
       "run_at": "document_end"
     }
   ],
