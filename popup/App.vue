@@ -1,21 +1,19 @@
 <template>
-  <div>
-    <div v-if="strategy">
-      Strategy: {{ strategy.resource }}
-      <h3>Task: {{ task.text }}</h3>
-      <h4>Description: {{ task.notes }}</h4>
-      <ul>
-        <li v-for="item of task.checklist">{{ item }}</li>
-      </ul>
-    </div>
-    <span v-else style="white-space: nowrap">Not supported</span>
+  <div class="container p-3">
+    <TaskForm v-if="strategy" :task="task"></TaskForm>
+    <span v-else class="whitespace-no-wrap">Not supported</span>
   </div>
 </template>
 <script>
+  import TaskForm from './TaskForm';
+
   export default {
+    components: {
+      TaskForm,
+    },
     data: () => ({
       strategy: null,
-      task: null
+      task: null,
     }),
     mounted() {
       chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
