@@ -21,7 +21,6 @@
       chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
         try {
           chrome.tabs.sendMessage(tabs[0].id, void 0, (response) => {
-            console.log(response);
             if (chrome.runtime.lastError) return;
             if (!response || !response.strategy) return;
             const { strategy, task } = response;
