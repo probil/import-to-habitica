@@ -42,8 +42,10 @@
         if (!apiKey || !userId) {
           throw new Error('Credentials are not filled');
         }
-        this.credentials.apiKey = apiKey;
-        this.credentials.userId = userId;
+        this.credentials = {
+          apiKey,
+          userId
+        };
         const { strategy, task } = await getDataFromContentScript() || {};
         this.strategy = strategy;
         this.task = task;

@@ -40,7 +40,7 @@
         <button class="hover:bg-gray-200 text-gray-800 text-sm font-bold py-2 px-4">
           Cancel
         </button>
-        <button @click="handleImport" class="bg-indigo-600 hover:bg-indigo-700 text-sm text-white font-bold py-2 px-4">
+        <button type="button" @click.prevent="handleImport" class="bg-indigo-600 hover:bg-indigo-700 text-sm text-white font-bold py-2 px-4">
           Import
         </button>
       </div>
