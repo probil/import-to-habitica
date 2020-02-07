@@ -79,6 +79,7 @@ typings/
 
 # User-specific stuff
 .idea/
+import-to-habitica.iml
 
 # CMake
 cmake-build-*/
@@ -151,3 +152,4 @@ $RECYCLE.BIN/
 
 /popup/dist/
 /content_scripts/dist/
+/chrome.zip
