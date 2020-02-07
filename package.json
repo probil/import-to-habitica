@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build:popup": "parcel build popup/index.html --public-url .  --no-source-maps --out-dir popup/dist",
     "build:content": "parcel build content_scripts/index.js --no-source-maps --out-dir content_scripts/dist",
-    "build": "yarn build:popup && yarn build:content"
+    "build": "yarn build:popup && yarn build:content",
+    "zip:chrome": "zip -r -FS ./chrome.zip manifest.json popup/dist/* content_scripts/dist/*"
   },
   "keywords": [],
   "author": "",
